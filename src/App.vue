@@ -1,15 +1,17 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <img alt="Realhr logo" src="./assets/logo-tag.png" height="50" width="250">
+  <DemoPortal/>
+<!--  <GenderDropDown/>-->
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import DemoPortal from "@/components/DemoPortal";
+// import GenderDropDown from "@/components/genderdropdown";
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    DemoPortal,
+    // GenderDropDown,
   }
 }
 </script>
@@ -21,6 +23,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 10px;
 }
 </style>
