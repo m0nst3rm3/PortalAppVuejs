@@ -20,6 +20,13 @@
               placeholder="Last Name"
               required="required"
           />
+          <h4>Gender:</h4>
+          <select v-model="gender" class="dropdown">
+            <option class="country" v-for="gender in GENDER_CHOICES" :key="gender" :value="gender">
+              {{ gender}}
+            </option>
+          </select>
+
           <h4>Organization Name:</h4>
           <input
               class="forms-input"
@@ -36,17 +43,21 @@
               placeholder="***********@aayulogic.com"
               required="required"
           />
-          <h4>Country:</h4>
-          <select v-model="selected" class="country">
-            <option class="country" v-for="country in countries" :key="country" :value="country.value">
-              {{ country.label }}
+          <h4>Organization Size:</h4>
+          <select v-model="organization_size" class="dropdown">
+            <option class="organization_size" v-for="organization_size in ORGANIZATION_CHOICES"
+                    :key="organization_size"
+                    :value="organization_size">
+              {{ organization_size}}
             </option>
           </select>
-<!--          <vue-country-code-->
-<!--              @onSelect="onSelect" :preferredCountries="['vn', 'us', 'gb']"-->
-<!--              :defaultCountry="np"-->
-<!--              :enabledFlags=true-->
-<!--          />-->
+          <h4>Country:</h4>
+          <select v-model="country" class="dropdown">
+            <option class="country" v-for="country in COUNTRIES" :key="country" :value="country">
+              {{ country}}
+            </option>
+          </select>
+
           <h4>Phone Number:</h4>
           <input
               class="forms-input"
@@ -63,8 +74,6 @@
               placeholder="Domain Name"
               required="required"
           />
-          <h4>Gender:</h4>
-          <GenderDropDown class="gender-dropdown"/>
         </div>
         <div class="button">
           <button type="submit">Book Your Demo</button>
@@ -75,31 +84,32 @@
 </template>
 
 <script>
-import GenderDropDown from "@/components/genderdropdown";
-const countries = require('i18n-iso-countries')
-countries.registerLocale(require('i18n-iso-countries/langs/en.json'))
+import {COUNTRIES} from "@/utils/constants"
 
-// import Vue from "vue";
-// import VueCountryCode from "vue-country-code-select";
-//
-// Vue.use(VueCountryCode);
 
 export default {
   name: "DemoPortal",
   components: {
-    GenderDropDown,
+
   },
-  computed: {
-    countries () {
-      const list = countries.getNames('en', { select: 'official' })
-      return Object.keys(list).map((key) => ({ value: key, label: list[key] }))
-    }
-  },
-  data () {
+  data() {
     return {
-      // selected: null
+      COUNTRIES,
+      country: 'Nepal',
+      GENDER_CHOICES: [('male','Male'), ('Female', "Female"), ('Others', "Others")],
+      gender: 'Male',
+      ORGANIZATION_CHOICES: [
+        ('0-50 Employees', '0-50 Employees'),
+        ('51-100 Employees', '51-100 Employees'),
+        ('101-150 Employees', '101-150 Employees'),
+        ('151-200 Employees', '151-200 Employees'),
+        ('201-250 Employees', '201-250 Employees'),
+        ('250+ Employees', '250+ Employees'),
+      ],
+      organization_size: '250+ Employees',
     }
   },
+
   methods: {
     onSelect({name, iso2, dialCode}) {
       console.log(name, iso2, dialCode);
@@ -110,14 +120,16 @@ export default {
 </script>
 
 <style scoped>
-#portal-form{
+#portal-form {
   text-align: center;
 }
-.forms{
+
+.forms {
   padding-left: 37%;
   padding-right: 40%;
   text-align: left;
 }
+
 .forms-input {
   width: 500px;
   height: 0px;
@@ -126,19 +138,16 @@ export default {
   padding: 20px;
   text-align: left;
 }
-.button{
+
+.button {
   width: 300px;
   height: 50px;
   padding-top: 0.5em;
   text-align: center;
+  size: A4;
 
 }
-/*.gender-dropdown{*/
-/*  width: 600px;*/
-/*  text-align: Center;*/
-/*}*/
-
-.country{
+.dropdown {
   width: 500px;
   height: 40px;
 }
