@@ -1,7 +1,7 @@
 <template>
   <div id="portal-form">
     <h2>Register here for Demo</h2>
-    <form>
+    <form @submit= "onSubmit">
       <div class="forms">
         <div>
           <h4>First Name:</h4>
@@ -76,7 +76,7 @@
           />
         </div>
         <div class="button">
-          <button type="submit">Book Your Demo</button>
+          <button class="c-Button c-Button--close" type="submit">Book Your Demo</button>
         </div>
       </div>
     </form>
@@ -111,9 +111,9 @@ export default {
   },
 
   methods: {
-    onSelect({name, iso2, dialCode}) {
-      console.log(name, iso2, dialCode);
-    },
+    onSubmit(){
+      console.log('form submitted')
+    }
   }
 };
 
@@ -134,6 +134,7 @@ export default {
   width: 500px;
   height: 0px;
   border-radius: 5px;
+  border-width: 1px;
   background-color: #f2f2f2;
   padding: 20px;
   text-align: left;
@@ -149,7 +150,16 @@ export default {
 }
 .dropdown {
   width: 500px;
-  height: 40px;
+  height: 45px;
+  font-family: Avenir, Helvetica, Arial, sans-serif
+
+}
+.c-Button {
+  border: none;
+  border-radius: 2px;
+}
+.c-Button--close {
+  background-color: aquamarine;
 }
 
 </style>
